@@ -14,8 +14,14 @@ import {
   FlexBoxDirection,
   Icon
 } from "@ui5/webcomponents-react";
+import { useNavigate } from "react-router-dom";
 
 const CustomList = (props) => {
+
+  const navigate = useNavigate();
+  const handleProgressHeaderClick = () => {
+    navigate("/detail");
+  };
 
   return (
     <div>
@@ -25,6 +31,8 @@ const CustomList = (props) => {
             titleText="Progress"
             subtitleText="List"
             avatar={<Icon name="list" />}
+            interactive
+            onClick={handleProgressHeaderClick}
           />
         }
         style={{ width: "300px", ...spacing.sapUiContentPadding }}

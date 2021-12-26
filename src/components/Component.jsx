@@ -1,32 +1,36 @@
 import React from "react";
-import { spacing } from "@ui5/webcomponents-react-base";
 import "@ui5/webcomponents-icons/dist/add.js";
-import { Avatar, ShellBar, ShellBarItem, FlexBox, FlexBoxJustifyContent, FlexBoxWrap } from "@ui5/webcomponents-react";
-import CustomChart from "./CustomChart";
-import CustomList from "./CustomList";
-import CustomAnalyticalTable from "./CustomAnalyticalTable";
+import { Avatar, ShellBar, ShellBarItem } from "@ui5/webcomponents-react"; // ui5 controls
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Home } from "./Home";
+import { Detail } from "./Detail";
+import { useNavigate } from "react-router-dom";
+import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme'; // for changing theme
+import '@ui5/webcomponents/dist/Assets'; // for changing theme
+import '@ui5/webcomponents-fiori/dist/Assets'; // only if you are using the ShellBar, Product Switch or the Upload Collection
 
 const Component = (props) => {
 
+  // setTheme("sap_belize");
+  const navigate = useNavigate("/detail");
+  const handleLogoClick = () => navigate("/")
+
   return (
-    <div>
-      <ShellBar 
+    <>
+      <ShellBar
         logo={<img src="reactLogo.png" alt="" />}
+        onLogoClick={handleLogoClick}
         profile={<Avatar><img src="profilePictureExample.png" alt="" /></Avatar>}
         primaryTitle="Analytics App"
       >
         <ShellBarItem icon="add" text="Add" />
       </ShellBar>
-      <FlexBox
-        justifyContent={FlexBoxJustifyContent.Center}
-        wrap={FlexBoxWrap.Wrap}
-        style={spacing.sapUiContentPadding}
-      >
-        <CustomChart dataset={props.dataset} />
-        <CustomList />
-        <CustomAnalyticalTable />
-      </FlexBox>
-    </div>
+      <Routes>
+        <Route path="/home" element={<Home dataset = {props.dataset} />} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/" element={<Navigate replace to = "/home" />} />
+      </Routes>
+    </>
   )
 };
 
