@@ -4,6 +4,7 @@ import {FlexBox, FlexBoxJustifyContent, FlexBoxWrap } from "@ui5/webcomponents-r
 import CustomChart from "./CustomChart"; // custom components
 import CustomList from "./CustomList"; // custom components
 import CustomAnalyticalTable from "./CustomAnalyticalTable"; // custom components
+import { MyCustomElement } from "./MyCustomElement"; // custom component
 
 export const Home = (props) => {
   return (
@@ -12,6 +13,7 @@ export const Home = (props) => {
       wrap={FlexBoxWrap.Wrap}
       style={spacing.sapUiContentPadding}
     >
+      <MyCustomElement />
       <CustomChart dataset={props.dataset} />
       <CustomList />
       <CustomAnalyticalTable />
